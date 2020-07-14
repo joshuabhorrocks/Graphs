@@ -35,30 +35,19 @@ class Graph:
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        # Create an empty queue
         q = Queue()
-
-        # Create a set to store the visited nodes
+        q.enqueue(starting_vertex)
         visited = set()
 
-        # Init: enqueue the starting node
-        q.enqueue(starting_vertex)
-
-        # While the queue isn't empty
         while q.size() > 0:
-            # Dequeue the first item
             v = q.dequeue()
-            # If it's not been visited:
             if v not in visited:
-                # Mark as visited (i.e. add to the visited set)
+                print(v)
                 visited.add(v)
 
-                # Do something with the node
-                print(f"BFT Visited: {v}")
-
-                # Add all neighbors to the queue
                 for next_vert in self.get_neighbors(v):
-                    q.enqueue(next_vert)
+                    if next_vert not in visited:
+                        q.enqueue(next_vert)
 
     def dft(self, starting_vertex):
         """
@@ -81,10 +70,11 @@ class Graph:
             # If it's not been visited:
             if v not in visited:
                 # Mark as visited (i.e. add to the visited set)
+                print(v)
                 visited.add(v)
 
                 # Do something with the node
-                print(f"DFT Visited: {v}")
+                # print(f"DFT Visited: {v}")
 
                 # Add all neighbors to the stack
                 for next_vert in self.get_neighbors(v):
@@ -100,11 +90,11 @@ class Graph:
         if visited == None:
             visited = set()
 
-        if starting_vertex not in visited:
-            visited.add(starting_vertex)
+        visited.add(starting_vertex)
+        print(starting_vertex)
     
-            for i in self.get_neighbors(starting_vertex):
-                print(f"DFT (Recursive) Visited: {i}")
+        for i in self.get_neighbors(starting_vertex):
+            if i not in visited:
                 self.dft_recursive(i, visited)
 
 
